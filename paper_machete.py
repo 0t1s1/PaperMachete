@@ -83,7 +83,7 @@ def get_file_selection(types):
         if types == "json" and guess_type(join(ANALYSIS, file))[0] == "application/json":
             filtered.append(file)
         elif types == "bin":
-            filecmd = (subprocess.check_output(["file", join(ANALYSIS, file)])).lower()
+            filecmd = str((subprocess.check_output(["file", join(ANALYSIS, file)])).lower())
             filecmd = filecmd.split(": ")[1] # remove file path returned by 'file' utility
             if "elf" in filecmd or "mach-o" in filecmd or "pe" in filecmd or ".bndb" in file.lower():
                 filtered.append(file)
@@ -133,10 +133,9 @@ def main():
 
         # check directories
         try:
-            subprocess.call(['grakn', 'version'], stdout=open(os.devnull, 'wb'))
-            subprocess.call(['graql', 'version'], stdout=open(os.devnull, 'wb'))
+            subprocess.call(['typedb', 'version'], stdout=open(os.devnull, 'wb'))
         except OSError:
-            print("Please ensure grakn and graql are in your PATH")
+            print("Please ensure typedb is in your PATH")
             sys.exit()
 
         if not isdir(MACHETE):
@@ -199,7 +198,7 @@ def main():
             # check to see if the keyspace already exists for this file
             try:
                 keyspace = json.lower().replace('.json', '')
-                keyspaces = literal_eval(urlopen('http://127.0.0.1:4567/kb').read())
+                keyspaces = literal_eval(urlopen('http://127.0.0.1:1729/kb').read())
 
                 inc = 1
                 finding_name = True
@@ -235,7 +234,7 @@ def main():
         # run CWE queries
         elif menu_option == 3:
             keyspace = None
-            keyspaces = literal_eval(urlopen('http://127.0.0.1:4567/kb').read())['keyspaces']
+            keyspaces = literal_eval(urlopen('http://127.0.0.1:1729/kb').read())['keyspaces']
 
             print_banner(MENU3)
 
@@ -261,9 +260,9 @@ def main():
             print("Restarting Grakn. Press \"Y\" when prompted.\nWait until you see the Grakn banner before continuing!")
             input(ENTER)
 
-            subprocess.call(["grakn", "server", "stop"])
-            subprocess.call(["grakn", "server", "clean"])
-            subprocess.call(["grakn", "server", "start"])
+            subprocess.call(["typedb", "server", "stop"])
+            subprocess.call(["typedb", "server", "clean"])
+            subprocess.call(["typedb", "server", "start"])
 
         # quit
         elif menu_option == 5:
