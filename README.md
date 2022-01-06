@@ -6,9 +6,9 @@
                |_|                                                      @==|;;;;;;>
 
 ## About
-Paper Machete (PM) orchestrates [Binary Ninja](https://binary.ninja) and [Grakn.ai](https://grakn.ai) to aid static binary analysis for the purpose of finding bugs in software. PM leverages the Binary Ninja MLIL SSA to extract semantic meaning about individual instructions, operations, register/variable state, and overall control flow.
+Paper Machete (PM) orchestrates [Binary Ninja](https://binary.ninja) and [TypeDB](https://vaticle.com/) to aid static binary analysis for the purpose of finding bugs in software. PM leverages the Binary Ninja MLIL SSA to extract semantic meaning about individual instructions, operations, register/variable state, and overall control flow.
 
-PM migrates this data into Grakn - a knowledge graph that gives us the ability to define domain-specific ontologies for data and write powerful inference rules to form relationships between data we don't want to (or can't) explicitly store. [Heeh, how neat is that](https://www.youtube.com/watch?v=Hm3JodBR-vs)?
+PM migrates this data into TypeDB - a knowledge graph that gives us the ability to define domain-specific ontologies for data and write powerful inference rules to form relationships between data we don't want to (or can't) explicitly store. [Heeh, how neat is that](https://www.youtube.com/watch?v=Hm3JodBR-vs)?
 
 This project was released in conjunction with a DerbyCon 2017 talk titled "Aiding Static Analysis: Discovering Vulnerabilities in Binary Targets through Knowledge Graph Inferences." You can watch that talk [here](http://www.irongeek.com/i.php?page=videos/derbycon7/t116-aiding-static-analysis-discovering-vulnerabilities-in-binary-targets-through-knowledge-graph-inferences-john-toterhi). 
 
@@ -17,15 +17,15 @@ Paper Machete's initial prototype and public codebase were developed by security
 ## Why BNIL?
 The BNIL suite of ILs is easy to work with, pleasantly verbose, and human-readable. At any point we can decide to leverage other levels and forms of the IL with little development effort on our part. When you add to that the ability to [lift multiple architectures](https://binary.ninja/faq/) and [write custom lifters](https://github.com/joshwatson/binaryninja-msp430), we have little reason not to use BNIL.
 
-## Why Grakn?
-Grakn's query language (Graql) is easy to learn and intuitive, which is extremely important in the early stages of this research while we're still hand-writing queries to model the patterns vulnerability researchers look for when performing static analysis. 
+## Why TypeDB?
+TypeDB's query language (TypeQL) is easy to learn and intuitive, which is extremely important in the early stages of this research while we're still hand-writing queries to model the patterns vulnerability researchers look for when performing static analysis. 
 
 The ability to write our own domain-specific ontologies lets us quickly experiment with new query ideas and ways of making our queries less complex. When we run into a case where we think "gee, if I just had access to the relationship between..." we can modify our ontology and inference rules to get that information.
 
 While the end game for PM is to eliminate the need for human-written queries, the fact is we're starting from square one. Which means hand-jamming a lot queries to model the patterns human vulnerability researchers look for when bug hunting.
 
 ## Dependencies
-Paper Machete requires [BinaryNinja v1.1](https://binary.ninja), [Grakn v1.4.2](https://github.com/graknlabs/grakn/releases/tag/v1.4.2), the [Grakn Python Driver](http://github.com/graknlabs/grakn-python), and the [Java JRE](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+Paper Machete requires [BinaryNinja v1.1](https://binary.ninja), [TypeDB v2.6.0](https://github.com/vaticle/typedb/releases/tag/2.6.0), the [TypDB Python Client](https://github.com/vaticle/typedb-client-python), and the [Java JRE](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
 
 ## Query Scripts
