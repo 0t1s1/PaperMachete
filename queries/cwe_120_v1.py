@@ -37,7 +37,7 @@ def main(keyspace):
             # If there are instructions that use the function check the instructions
             for instr in result2:
                 ins_addr = instr.value()
-                print("CWE-120: Buffer Copy Without Checking Size of Input at {}".format(ins_addr))
+                print(("CWE-120: Buffer Copy Without Checking Size of Input at {}".format(ins_addr)))
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

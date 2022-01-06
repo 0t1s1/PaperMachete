@@ -64,12 +64,12 @@ def main(keyspace):
                         if item['var'].value() not in var:
                             #failed to find upper bound check
                             addr = get_addr(entry)
-                            print('CWE-129: Missing upper bound check at ' + str(addr[0]['addr'].value()))
+                            print(('CWE-129: Missing upper bound check at ' + str(addr[0]['addr'].value())))
                         else:
                             adddr = get_addr(entry)
                 else:
                     addr = get_addr(entry)
-                    print('CWE-129: Missing upper bound check at ' + str(addr[0]['addr'].value()))
+                    print(('CWE-129: Missing upper bound check at ' + str(addr[0]['addr'].value())))
             #Do lower bound check
             else:
                 upper = upperCheck()
@@ -78,12 +78,12 @@ def main(keyspace):
                         if item['var'].value() not in var:
                             #failed to find lower bound check
                             addr = get_addr(entry)
-                            print('CWE-129: Missing lower bound check at ' + str(addr[0]['addr'].value()))
+                            print(('CWE-129: Missing lower bound check at ' + str(addr[0]['addr'].value())))
                         else:
                             addr = get_addr(entry)
                 else:
                     addr = get_addr(entry)
-                    print('CWE-129: Missing lower bound check at ' + str(addr[0]['addr'].value()))
+                    print(('CWE-129: Missing lower bound check at ' + str(addr[0]['addr'].value())))
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

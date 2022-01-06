@@ -89,7 +89,7 @@ def main(keyspace):
                                 result5 = [result.map() for result in graph.query(query5)]
                                 instr_addr = result5[0]['a'].value()
 
-                                print("CWE-121: Stack-based Overflow possible at {}".format(instr_addr))
+                                print(("CWE-121: Stack-based Overflow possible at {}".format(instr_addr)))
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

@@ -114,7 +114,7 @@ def main(keyspace):
         for entry in var:
             if entry not in var2:
                 q6 = query6(reg_type[i], reg[i])
-                print('CWE-788: Array index missing bounds check at ' + q6[0]['adr'].value() + ' associated with '+ var[i] + '#' + str(version[i]) + ' id = ' + var_id[i] + ' sub of ' + reg_type[i] + ' id = ' + reg[i])
+                print(('CWE-788: Array index missing bounds check at ' + q6[0]['adr'].value() + ' associated with '+ var[i] + '#' + str(version[i]) + ' id = ' + var_id[i] + ' sub of ' + reg_type[i] + ' id = ' + reg[i]))
             i += 1
 
 if __name__ == "__main__":

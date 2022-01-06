@@ -26,13 +26,13 @@ def main(keyspace):
         if len(result1) > 0:
             print("Found potential calls at the following addresses:")
             for addr in result1:
-                print(addr['a'].value())
+                print((addr['a'].value()))
 
         # If printf is found continue query
         for printf_func in result1:
             # Pull any instructions that use printf and don't use a modifier (have var type and not data type)
             func_addr = int(printf_func['a'].value(), 16)
-            print("Scanning address {}".format(hex(func_addr)))
+            print(("Scanning address {}".format(hex(func_addr))))
             query2 = 'match $x isa instruction, has operation-type "MLIL_CALL_SSA", has asm-address $a; $y isa "MLIL_CONST_PTR"; ($x,$y); $z isa constant, has constant-value {}; ($y,$z); $l isa list, has list-size 1; ($x,$l); $s isa "MLIL_VAR_SSA"; ($l,$s); offset 0; limit 500; get $x, $a;'.format(func_addr)
             result2 = [result.map() for result in graph.query(query2)]
 
@@ -40,12 +40,12 @@ def main(keyspace):
             if result2:
                 for instr in result2:
                     asm_addr = instr['a'].value()
-                    print("CWE-134: Uncontrolled Format String possible at {} ".format(asm_addr))
+                    print(("CWE-134: Uncontrolled Format String possible at {} ".format(asm_addr)))
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         keyspace = sys.argv[1]
         main(keyspace)
     else:
-        print("Please specify a keyspace to search.\nUsage: python3.6 {} <keyspace>".format(sys.argv[0]))
+        print(("Please specify a keyspace to search.\nUsage: python3.6 {} <keyspace>".format(sys.argv[0])))
 
